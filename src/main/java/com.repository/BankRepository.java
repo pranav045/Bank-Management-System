@@ -47,6 +47,7 @@ public class BankRepository {
 		sc.close();
 		et.begin();
 		em.persist(b1);
+		em.persist(br);
 		et.commit();
 	}
 
