@@ -4,16 +4,19 @@ import java.util.Scanner;
 
 import com.repository.AccountRepository;
 import com.repository.BankRepository;
+import com.repository.BranchRepository;
 
 public class Controller {
 	public static void main(String[] args) {
 		AccountRepository account = new AccountRepository();
 		BankRepository Bank = new BankRepository();
+		BranchRepository Branch = new BranchRepository();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Welcome to the Bank Management System");
 		System.out.println("How may I help you?");
 		System.out.println("1. Account Settings");
 		System.out.println("2. Bank settings");
+		System.out.println("3. Branch settings");
 		System.out.print("Enter option: ");
 		int option = sc.nextInt();
 		switch (option) {
@@ -43,6 +46,21 @@ public class Controller {
 				break;
 			}
 			break;
+		case 3:
+			System.out.println("1. Add Branch");
+			System.out.println("2. Remove Branch");
+			System.out.print("Enter option: ");
+			int option4 = sc.nextInt();
+			switch (option4) {
+			case 1:
+				Branch.addBranch();
+				break;
+			case 2:
+				Branch.removeBranch();
+				break;
+			}
+			break;
 		}
+		sc.close();
 	}
 }
