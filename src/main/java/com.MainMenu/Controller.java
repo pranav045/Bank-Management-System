@@ -6,6 +6,7 @@ import com.repository.AccountRepository;
 import com.repository.BankRepository;
 import com.repository.BranchRepository;
 import com.repository.CustomerRepository;
+import com.repository.LoanRepository;
 
 public class Controller {
 	public static void main(String[] args) {
@@ -13,6 +14,7 @@ public class Controller {
 		BankRepository Bank = new BankRepository();
 		BranchRepository Branch = new BranchRepository();
 		CustomerRepository Customer = new CustomerRepository();
+		LoanRepository loan = new LoanRepository();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Welcome to the Bank Management System");
 		System.out.println("How may I help you?");
@@ -20,6 +22,7 @@ public class Controller {
 		System.out.println("2. Bank settings");
 		System.out.println("3. Branch settings");
 		System.out.println("4. Customer settings");
+		System.out.println("5. Loan settings");
 		System.out.print("Enter option: ");
 		int option = sc.nextInt();
 		switch (option) {
@@ -74,6 +77,20 @@ public class Controller {
 				break;
 			case 2:
 				Customer.removeCustomer();
+				break;
+			}
+			break;
+		case 5:
+			System.out.println("1. Add Loan");
+			System.out.println("2. Remove Loan");
+			System.out.print("Enter option: ");
+			int option6 = sc.nextInt();
+			switch (option6) {
+			case 1:
+				loan.addLoan();
+				break;
+			case 2:
+				loan.removeLoan();
 				break;
 			}
 			break;
