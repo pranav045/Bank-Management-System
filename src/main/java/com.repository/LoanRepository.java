@@ -67,4 +67,20 @@ public class LoanRepository {
 		et.commit();
 		sc.close();
 	}
+		public void removeLoan() {
+		EntityManager em = HibernateConnection.getEntityManager();
+		EntityTransaction et = em.getTransaction();
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter Loan Id: ");
+		int id = sc.nextInt();
+		Loan loan = em.find(Loan.class, id);
+		if (loan != null) {
+			et.begin();
+			em.remove(loan);
+			et.commit();
+		} else {
+			System.out.println("Loan id " + id + " not exists");
+		}
+		sc.close();
+	}
 }
