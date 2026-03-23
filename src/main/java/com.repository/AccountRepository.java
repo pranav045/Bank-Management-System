@@ -16,19 +16,26 @@ public class AccountRepository {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Account No.: ");
 		String acc_no = sc.nextLine();
-		sc.nextLine();
-		System.out.print("Enter Account Type: ");
-		String acc_type = sc.nextLine();
-		System.out.print("Enter Account Balance: ");
-		double balance = sc.nextDouble();
-		Account ac1 = new Account();
-		ac1.setAccount_no(acc_no);
-		ac1.setAcc_Type(acc_type);
-		ac1.setBalance(balance);
+		Account ac1 = em.find(Account.class, acc_no);
+		if (ac1 == null) {
+			ac1 = new Account();
+			ac1.setAccount_no(acc_no);
+			System.out.print("Enter Account Type: ");
+			String acc_type = sc.nextLine();
+			System.out.print("Enter Account Balance: ");
+			double balance = sc.nextDouble();
+			ac1.setAcc_Type(acc_type);
+			ac1.setBalance(balance);
+		} else {
+			System.out.println("Account already exists");
+		}
 		sc.close();
 		et.begin();
-		em.persist(ac1);
+		if (em.find(Account.class, acc_no) == null) {
+			em.persist(ac1);
+		}
 		et.commit();
+		sc.close();
 	}
 
 	public void removeAccount() {
@@ -40,12 +47,12 @@ public class AccountRepository {
 		sc.nextLine();
 		Account ac1 = em.find(Account.class, acc_no);
 		if (ac1 != null) {
+			et.begin();
 			em.remove(ac1);
+			et.commit();
 		} else {
 			System.out.println("Account doesn't exists");
 		}
-		et.begin();
-		em.persist(ac1);
-		et.commit();
+		sc.close();
 	}
 }
