@@ -87,5 +87,32 @@ public class CustomerRepository {
 		} else {
 			System.out.println("Customer doesn't exist");
 		}
+		sc.close();
+	}
+
+	public void allAccounts() {
+		EntityManager em = HibernateConnection.getEntityManager();
+		EntityTransaction et = em.getTransaction();
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter Customer Id: ");
+		int id = sc.nextInt();
+		sc.nextLine();
+		Customer customer = em.find(Customer.class, id);
+		if (customer == null) {
+			System.out.println("Customer doesn't exists");
+		} else {
+			et.begin();
+			List<Account> accounts = customer.getAccount();
+			et.commit();
+
+			if (accounts == null || accounts.isEmpty()) {
+				System.out.println("No accounts found for this customer.");
+			} else {
+				for (Account acc : accounts) {
+					System.out.println(acc);
+				}
+			}
+		}
+
 	}
 }
