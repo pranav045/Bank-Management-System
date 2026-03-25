@@ -27,6 +27,8 @@ public class Controller {
 		int option = sc.nextInt();
 		switch (option) {
 		case 1:
+			System.out.println("1. Add Account");
+			System.out.println("2. Remove Account");
 			System.out.print("Enter option: ");
 			int option2 = sc.nextInt();
 			switch (option2) {
@@ -69,6 +71,7 @@ public class Controller {
 		case 4:
 			System.out.println("1. Add Customer");
 			System.out.println("2. Remove Customer");
+			System.out.println("3. Show accounts");
 			System.out.print("Enter option: ");
 			int option5 = sc.nextInt();
 			switch (option5) {
@@ -77,6 +80,9 @@ public class Controller {
 				break;
 			case 2:
 				Customer.removeCustomer();
+				break;
+			case 3:
+				Customer.allAccounts();
 				break;
 			}
 			break;
